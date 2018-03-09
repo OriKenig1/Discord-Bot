@@ -44,21 +44,6 @@ app.listen(port, () => {
 bot.on("ready", function() {
     console.log("Gnar Bot, ONLINE");
     bot.user.setGame('EGO VEGO')
-	
-	var channelName = 'Synapse';
-
-$.get(
-	"https://www.googleapis.com/youtube/v3/channels", {
-		part: 'contentDetails',
-		forUsername: channelName,
-		key: 'AIzaSyCt5NL8NA9wZgiA4zWKmy3WsrSkKD210zU'},
-		function(data){
-			$.each(data.items, function(i, item){
-				console.log(item);
-			})
-		}
-);
-	
 });
 
 bot.on("message", function(message) {
@@ -69,6 +54,21 @@ bot.on("message", function(message) {
     var args = message.content.substring(PREFIX.length).split(" ");
 
     switch (args[0].toLowerCase()){
+		case "yo":
+			var channelName = 'Synapse';
+
+			$.get(
+				"https://www.googleapis.com/youtube/v3/channels", {
+					part: 'contentDetails',
+					forUsername: channelName,
+					key: 'AIzaSyCt5NL8NA9wZgiA4zWKmy3WsrSkKD210zU'},
+					function(data){
+						$.each(data.items, function(i, item){
+						console.log(item);
+						})
+					}
+			);		
+			break;
         case "info":
             message.channel.send("Gnar Bot, made by Orangę");
             break;
@@ -275,7 +275,7 @@ bot.login(TOKEN);
 
 // To keep bot awake
 setInterval(() => {
-    http.get('http://nagisabot.herokuapp.com');
+    http.get('https://kenig-discord-bot.herokuapp.com/');
   }, 900000);
 
 function rank_to_string(rank_num){
