@@ -57,7 +57,8 @@ bot.on("message", function(message) {
 		case "yo":
 			var channelName = 'Synapse';
 
-			$.get(
+			$(document).ready(function(){
+				$.get(
 				"https://www.googleapis.com/youtube/v3/channels", {
 					part: 'contentDetails',
 					forUsername: channelName,
@@ -67,7 +68,8 @@ bot.on("message", function(message) {
 						console.log(item);
 						})
 					}
-			);		
+				);
+			});		
 			break;
         case "info":
             message.channel.send("Gnar Bot, made by Orangę");
