@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 var bot = new Discord.Client();
 
 const fs = require('fs');
-const superagent = require("superagent");
 const gatherFunctions = require("./commands/gather.js");
 
 bot.commands = new Discord.Collection();
@@ -32,8 +31,8 @@ const PREFIX = "~";
 var fortunes = ["Gnar!", "Shubbanuffa", "Vimaga", "Nakotak", "Kshaa", "Vigishu!", "Wap!", "Hwa!", "Vrooboo", "Raag!", "Wabbo!"];
 
 
-set the port of our application
-process.env.PORT lets the port be set by Heroku
+//set the port of our application
+//process.env.PORT lets the port be set by Heroku
 const port = process.env.PORT || 5000; 
 
 app.listen(port, () => {
