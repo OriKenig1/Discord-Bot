@@ -22,7 +22,6 @@ fs.readdir("./commands/", (err, files) => {
 	});
 	
 });
-const TOKEN = 'NDIxMjkyNTAwNjk5OTcxNTg0.DYLGwQ.fU8cKe1OxLbkO3A6Q33G3BbHEOw';
 const TOKEN = process.env.TOKEN;
 
 const express = require('express');
