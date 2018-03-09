@@ -1,26 +1,21 @@
 const Discord = require("discord.js");
+var bot = new Discord.Client();
+
 const TOKEN = process.env.TOKEN;
+
+var $ = require("jquery");
 
 const express = require('express');
 const app = express();
 
-var bot = new Discord.Client();
-
 const PREFIX = "~";
 
 var fortunes = ["Gnar!", "Shubbanuffa", "Vimaga", "Nakotak", "Kshaa", "Vigishu!", "Wap!", "Hwa!", "Vrooboo", "Raag!", "Wabbo!"];
-var servers =  {}; 
-var URL;
-var dispatcher;
-var stream;
-var currConnection;
 
-var code = "code";
 var gather = false;
 var gatherSize = 0;
 var players = [];
 var members = [];
-var volume = 1;
 
 var members_rank = [];
 var ranks = [0, 0 , 0 , 0 , 0 , 0 , 0 , 0, 0 , 0]; // Unranked, Bronze, Silver, Gold, Platinum, Diamond 5, Diamond 4, Diamond 3, Diamond 2, Diamond 1
