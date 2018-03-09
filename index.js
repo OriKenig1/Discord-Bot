@@ -45,7 +45,19 @@ bot.on("ready", function() {
     console.log("Gnar Bot, ONLINE");
     bot.user.setGame('EGO VEGO')
 	
-	
+	var channelName = 'Synapse';
+
+$.get(
+	"https://www.googleapis.com/youtube/v3/channels", {
+		part: 'contentDetails',
+		forUsername: channelName,
+		key: 'AIzaSyCt5NL8NA9wZgiA4zWKmy3WsrSkKD210zU'},
+		function(data){
+			$.each(data.items, function(i, item){
+				console.log(item);
+			})
+		}
+);
 	
 });
 
