@@ -3,7 +3,9 @@ var bot = new Discord.Client();
 
 const TOKEN = process.env.TOKEN;
 
-var $ = require("jquery");
+const jsdom = require("jsdom");
+const dom = new jsdom.JSDOM(`<!DOCTYPE html>`);
+var $ = require("jquery")(dom.window);
 
 const express = require('express');
 const app = express();
