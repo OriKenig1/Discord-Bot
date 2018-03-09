@@ -15,11 +15,9 @@ var Red_Names;
 var Blue_Names;
 var Red_IDS;
 var Blue_IDS;
-
-let Admin = message.guild.roles.find("name", "♛ Administrator ♛");
-
 module.exports.run = async (bot, message, args) => {
 	
+	let Admin = message.guild.roles.find("name", "♛ Administrator ♛");
 	var roles = message.member.roles;
 	if(roles.has(Admin.id))
 		this.resetGather(true, message);
