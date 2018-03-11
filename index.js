@@ -101,11 +101,11 @@ setInterval(() => {
 				console.log("Vars: " + videos.length + " | " + prevCount);
 				if(videos.length > prevCount){
 					globalChannel.send("**A new NA LCS video is up!** \n" + videos[0].shortURL);
-					fs.writeFile('./tmp/playlistSizeTEMP', prevCount++, function (err) {
+					fs.writeFile('tmp/playlistSizeTEMP', prevCount++, function (err) {
 						if (err) throw err;
 					});
 				}else{
-					fs.writeFile('./tmp/playlistSizeTEMP', 0, function (err) {
+					fs.writeFile('tmp/playlistSizeTEMP', 0, function (err) {
 						if (err) throw err;
 					});
 				}
