@@ -92,10 +92,11 @@ bot.on("message", async message => {
 bot.login(TOKEN);
 
 // https://www.youtube.com/playlist?list=PLVGT_7RQui0EUJUKxqJbeGsFlzZWCXiz7 <- Synapse
+// https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl <- NA LCS
 // To keep bot awake
 setInterval(() => {
 	console.log("Checking Synapse's playlist...");
-	youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
+	youtube.getPlaylist('https://www.youtube.com/playlist?list=PLVGT_7RQui0EUJUKxqJbeGsFlzZWCXiz7')
 	.then(playlist => {
 		playlist.getVideos()
         .then(videos => {
