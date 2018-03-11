@@ -104,6 +104,10 @@ setInterval(() => {
 					fs.writeFile('./tmp/playlistSizeTEMP', prevCount++, function (err) {
 						if (err) throw err;
 					});
+				}else{
+					fs.writeFile('./tmp/playlistSizeTEMP', 0, function (err) {
+						if (err) throw err;
+					});
 				}
             }).catch(console.log);
     })
