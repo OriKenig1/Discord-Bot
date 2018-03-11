@@ -16,6 +16,7 @@
   "dependencies": {
     "discord.js": "^11.2.1",
     "express": "latest",
+    "simple-youtube-api": "^5.0.1",
     "superagent": "^3.8.2"
   },
   "repository": {

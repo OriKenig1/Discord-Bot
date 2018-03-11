@@ -1,10 +1,13 @@
 const Discord = require("discord.js");
 var bot = new Discord.Client();
+const YouTube = require('simple-youtube-api');
+const youtube = new YouTube('AIzaSyCt5NL8NA9wZgiA4zWKmy3WsrSkKD210zU');
 
 const fs = require('fs');
 const gatherFunctions = require("./commands/gather.js");
 
 bot.commands = new Discord.Collection();
+var globalChannel;
 
 fs.readdir("./commands/", (err, files) => {
 	if(err) console.log(err);
@@ -21,16 +24,20 @@ fs.readdir("./commands/", (err, files) => {
 	});
 	
 });
-const TOKEN = process.env.TOKEN;
+//const TOKEN = process.env.TOKEN;
+const TOKEN = "NDIxMjkyNTAwNjk5OTcxNTg0.DYVM6A.55VjuxkJMsFWvEOwCuhrawOEDAY";
 
+/*
 const express = require('express');
 const app = express();
+*/
 
 const PREFIX = "~";
 
 var fortunes = ["Gnar!", "Shubbanuffa", "Vimaga", "Nakotak", "Kshaa", "Vigishu!", "Wap!", "Hwa!", "Vrooboo", "Raag!", "Wabbo!"];
 
 
+/*
 //set the port of our application
 //process.env.PORT lets the port be set by Heroku
 const port = process.env.PORT || 5000; 
@@ -39,7 +46,7 @@ app.listen(port, () => {
     // will echo 'Our app is running on http://localhost:5000 when run locally'
     console.log('Our app is running on http://localhost:' + port);
 });
-
+*/
 
 
 bot.on("ready", function() {
@@ -49,6 +56,9 @@ bot.on("ready", function() {
 });
 
 bot.on("message", async message => {
+	
+	if(globalChannel == null && message.channel.name == "general")
+		globalChannel = message.channel;
 	
 	if(message.author.bot) return;
     if(!message.content.startsWith(PREFIX)) return;
@@ -82,8 +92,7 @@ bot.on("message", async message => {
             var embed = new Discord.RichEmbed()
                 .addField("Commands",
                 "~ask [question] - ask Gnar a question"
-				+ "\n" +
-				"~dog - doggy picture")
+				+ "\n")
                 .setColor('ORANGE');
                 message.channel.send(embed);
             break;
@@ -94,7 +103,24 @@ bot.on("message", async message => {
 
 bot.login(TOKEN);
 
+// https://www.youtube.com/playlist?list=PLVGT_7RQui0EUJUKxqJbeGsFlzZWCXiz7 <- Synapse
 // To keep bot awake
 setInterval(() => {
-    http.get('https://kenig-discord-bot.herokuapp.com/');
+	console.log("Checking Synapse's playlist...");
+    //http.get('https://kenig-discord-bot.herokuapp.com/');
+	fs.readFile('./playlistSize', function(err, prevCount) {
+		youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
+		.then(playlist => {
+			playlist.getVideos()
+            .then(videos => {
+				if(videos.length > prevCount){
+					globalChannel.send("**A new NA LCS video is up!** \n" + videos[0].shortURL);
+					fs.writeFile('./playlistSize', prevCount++, function (err) {
+						if (err) throw err;
+					});
+				}
+            }).catch(console.log);
+    })
+    .catch(console.log);		
+	});
   }, 900000);
