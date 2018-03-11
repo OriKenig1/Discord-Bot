@@ -93,7 +93,6 @@ bot.login(TOKEN);
 // To keep bot awake
 setInterval(() => {
 	console.log("Checking Synapse's playlist...");
-	
 	fs.readFile('./playlistSize', function(err, prevCount) {
 		youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
 		.then(playlist => {
@@ -110,4 +109,4 @@ setInterval(() => {
     .catch(console.log);		
 	});
 	
-  }, 9000);
+  }, 900000);
