@@ -35,19 +35,6 @@ const PREFIX = "~";
 
 var fortunes = ["Gnar!", "Shubbanuffa", "Vimaga", "Nakotak", "Kshaa", "Vigishu!", "Wap!", "Hwa!", "Vrooboo", "Raag!", "Wabbo!"];
 
-
-
-//set the port of our application
-//process.env.PORT lets the port be set by Heroku
-const port = process.env.PORT || 5000; 
-
-app.listen(port, () => {
-    // will echo 'Our app is running on http://localhost:5000 when run locally'
-    console.log('Our app is running on http://localhost:' + port);
-});
-
-
-
 bot.on("ready", function() {
     console.log("Gnar Bot, ONLINE");
     bot.user.setGame('EGO VEGO')
@@ -106,7 +93,20 @@ bot.login(TOKEN);
 // To keep bot awake
 setInterval(() => {
 	console.log("Checking Synapse's playlist...");
-    //http.get('https://kenig-discord-bot.herokuapp.com/');
+	youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
+	.then(playlist => {
+		playlist.getVideos()
+        .then(videos => {
+				if(videos.length > process.env['PLAYLIST_SIZE']){
+					globalChannel.send("**A new NA LCS video is up!** \n" + videos[0].shortURL);
+					process.env['PLAYLIST_SIZE'] = process.env['PLAYLIST_SIZE'] + 1;
+				}
+            }).catch(console.log);
+    })
+    .catch(console.log);		
+	});
+	console.log("new: " + process.env['PLAYLIST_SIZE']);
+	/*
 	fs.readFile('./playlistSize', function(err, prevCount) {
 		youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
 		.then(playlist => {
@@ -122,4 +122,5 @@ setInterval(() => {
     })
     .catch(console.log);		
 	});
+	*/
   }, 900000);
