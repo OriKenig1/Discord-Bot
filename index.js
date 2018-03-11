@@ -103,7 +103,7 @@ setInterval(() => {
 				}
             }).catch(console.log);
     })
-    .catch(console.log);		
+    .catch(console.log)		
 	});
 	console.log("new: " + process.env['PLAYLIST_SIZE']);
 	/*
