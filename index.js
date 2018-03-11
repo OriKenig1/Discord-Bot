@@ -93,19 +93,7 @@ bot.login(TOKEN);
 // To keep bot awake
 setInterval(() => {
 	console.log("Checking Synapse's playlist...");
-	youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
-	.then(playlist => {
-		playlist.getVideos()
-        .then(videos => {
-				if(videos.length > process.env['PLAYLIST_SIZE']){
-					globalChannel.send("**A new NA LCS video is up!** \n" + videos[0].shortURL);
-					process.env['PLAYLIST_SIZE'] = process.env['PLAYLIST_SIZE'] + 1;
-				}
-            }).catch(console.log);
-    })
-    .catch(console.log)		
-	console.log("new: " + process.env['PLAYLIST_SIZE']);
-	/*
+	
 	fs.readFile('./playlistSize', function(err, prevCount) {
 		youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
 		.then(playlist => {
@@ -121,5 +109,5 @@ setInterval(() => {
     })
     .catch(console.log);		
 	});
-	*/
-  }, 900000);
+	
+  }, 9000);
