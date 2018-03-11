@@ -104,7 +104,6 @@ setInterval(() => {
             }).catch(console.log);
     })
     .catch(console.log)		
-	});
 	console.log("new: " + process.env['PLAYLIST_SIZE']);
 	/*
 	fs.readFile('./playlistSize', function(err, prevCount) {
