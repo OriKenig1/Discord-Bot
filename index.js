@@ -24,20 +24,19 @@ fs.readdir("./commands/", (err, files) => {
 	});
 	
 });
-//const TOKEN = process.env.TOKEN;
-const TOKEN = "NDIxMjkyNTAwNjk5OTcxNTg0.DYVM6A.55VjuxkJMsFWvEOwCuhrawOEDAY";
+const TOKEN = process.env.TOKEN;
 
-/*
+
 const express = require('express');
 const app = express();
-*/
+
 
 const PREFIX = "~";
 
 var fortunes = ["Gnar!", "Shubbanuffa", "Vimaga", "Nakotak", "Kshaa", "Vigishu!", "Wap!", "Hwa!", "Vrooboo", "Raag!", "Wabbo!"];
 
 
-/*
+
 //set the port of our application
 //process.env.PORT lets the port be set by Heroku
 const port = process.env.PORT || 5000; 
@@ -46,7 +45,7 @@ app.listen(port, () => {
     // will echo 'Our app is running on http://localhost:5000 when run locally'
     console.log('Our app is running on http://localhost:' + port);
 });
-*/
+
 
 
 bot.on("ready", function() {
