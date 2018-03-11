@@ -127,4 +127,4 @@ setInterval(() => {
     .catch(console.log);		
 	});
 	*/
-  }, 9000000);
+  }, 900000);
