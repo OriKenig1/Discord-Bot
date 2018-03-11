@@ -7,7 +7,9 @@ const fs = require('fs');
 const gatherFunctions = require("./commands/gather.js");
 
 bot.commands = new Discord.Collection();
+
 var globalChannel;
+var count = 0;
 
 fs.readdir("./commands/", (err, files) => {
 	if(err) console.log(err);
@@ -93,6 +95,19 @@ bot.login(TOKEN);
 // To keep bot awake
 setInterval(() => {
 	console.log("Checking Synapse's playlist...");
+	youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
+	.then(playlist => {
+		playlist.getVideos()
+        .then(videos => {
+			console.log("Vars: " + videos.length + " | " + count);
+			if(videos.length > count){
+				globalChannel.send("**A new Synapse video is up!** \n" + videos[0].shortURL);
+				count = videos.length;
+			}
+        }).catch(console.log);
+    })
+    .catch(console.log);
+	/*
 	fs.readFile('./tmp/playlistSizeTEMP', function(err, prevCount) {
 		youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
 		.then(playlist => {
@@ -104,13 +119,10 @@ setInterval(() => {
 					fs.writeFile('tmp/playlistSizeTEMP', prevCount++, function (err) {
 						if (err) throw err;
 					});
-				}else{
-					fs.writeFile('tmp/playlistSizeTEMP', 0, function (err) {
-						if (err) throw err;
-					});
 				}
             }).catch(console.log);
     })
     .catch(console.log);		
 	});
+	*/
   }, 9000);
