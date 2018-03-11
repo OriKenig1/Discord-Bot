@@ -95,14 +95,15 @@ bot.login(TOKEN);
 // https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl <- NA LCS
 // To keep bot awake
 setInterval(() => {
-	console.log("Checking Synapse's playlist...");
-	youtube.getPlaylist('https://www.youtube.com/playlist?list=PLVGT_7RQui0EUJUKxqJbeGsFlzZWCXiz7')
+	var name = "NA LCS";
+	console.log("Checking " + name + " playlist...");
+	youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
 	.then(playlist => {
 		playlist.getVideos()
         .then(videos => {
 			console.log("Vars: " + videos.length + " | " + count);
 			if(videos.length > count){
-				globalChannel.send("**A new Synapse video is up!** \n" + videos[0].shortURL);
+				globalChannel.send("**A new " + name + " video is up!** \n" + videos[0].shortURL);
 				count = videos.length;
 			}
         }).catch(console.log);
@@ -126,4 +127,4 @@ setInterval(() => {
     .catch(console.log);		
 	});
 	*/
-  }, 9000);
+  }, 9000000);
