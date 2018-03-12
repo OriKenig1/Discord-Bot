@@ -41,6 +41,7 @@ bot.on("ready", function() {
     console.log("Gnar Bot, ONLINE");
     bot.user.setGame('EGO VEGO')
 	gatherFunctions.resetGather(false, null);
+	checkPlaylist(false);
 });
 
 bot.on("message", async message => {
@@ -80,7 +81,7 @@ bot.on("message", async message => {
             var embed = new Discord.RichEmbed()
                 .addField("Commands",
                 "~ask [question] - ask Gnar a question"
-				+ "\n")
+				+ "\n" + "~dog - get a random doggy picture")
                 .setColor('ORANGE');
                 message.channel.send(embed);
             break;
@@ -89,27 +90,35 @@ bot.on("message", async message => {
     }
 });
 
+function checkPlaylist(post){
+	var name = "Synapse";
+	console.log("Checking " + name + " playlist...");
+	youtube.getPlaylist('https://www.youtube.com/playlist?list=PLVGT_7RQui0EUJUKxqJbeGsFlzZWCXiz7')
+	.then(playlist => {
+		playlist.getVideos()
+        .then(videos => {
+			console.log("Results: " + videos.length + " | " + count);
+			if(videos.length > count){
+				if(post)
+					globalChannel.send("**A new " + name + " video is up!** \n" + videos[0].shortURL);
+				count = videos.length;
+			}
+        }).catch(console.log);
+    })
+    .catch(console.log);
+}
+
 bot.login(TOKEN);
 
 // https://www.youtube.com/playlist?list=PLVGT_7RQui0EUJUKxqJbeGsFlzZWCXiz7 <- Synapse
 // https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl <- NA LCS
 // To keep bot awake
 setInterval(() => {
-	var name = "NA LCS";
-	console.log("Checking " + name + " playlist...");
-	youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
-	.then(playlist => {
-		playlist.getVideos()
-        .then(videos => {
-			console.log("Vars: " + videos.length + " | " + count);
-			if(videos.length > count){
-				globalChannel.send("**A new " + name + " video is up!** \n" + videos[0].shortURL);
-				count = videos.length;
-			}
-        }).catch(console.log);
-    })
-    .catch(console.log);
-	/*
+	checkPlaylist(true);
+  }, 900000);
+  
+  
+  /*
 	fs.readFile('./tmp/playlistSizeTEMP', function(err, prevCount) {
 		youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
 		.then(playlist => {
@@ -127,4 +136,3 @@ setInterval(() => {
     .catch(console.log);		
 	});
 	*/
-  }, 900000);
