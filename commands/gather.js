@@ -18,8 +18,9 @@ var Blue_IDS;
 module.exports.run = async (bot, message, args) => {
 	
 	let Admin = message.guild.roles.find("name", "♛ Administrator ♛");
+	let smiley = message.guild.roles.find("name", "🤨");
 	var roles = message.member.roles;
-	if(roles.has(Admin.id))
+	if(roles.has(Admin.id) || roles.has(smiley.id))
 		this.resetGather(true, message);
 
 }
