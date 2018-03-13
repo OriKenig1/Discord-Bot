@@ -34,7 +34,7 @@ const app = express();
 
 
 const PREFIX = "~";
-
+q
 var fortunes = ["Gnar!", "Shubbanuffa", "Vimaga", "Nakotak", "Kshaa", "Vigishu!", "Wap!", "Hwa!", "Vrooboo", "Raag!", "Wabbo!"];
 
 bot.on("ready", function() {
@@ -81,7 +81,9 @@ bot.on("message", async message => {
             var embed = new Discord.RichEmbed()
                 .addField("Commands",
                 "~ask [question] - ask Gnar a question"
-				+ "\n" + "~dog - get a random doggy picture")
+				+ "\n" + "~join - join an open gather"
+				+ "\n" + "~leave - leave the gather"
+				+ "\n" + "~dog - get a random doggy picture");
                 .setColor('ORANGE');
                 message.channel.send(embed);
             break;
