@@ -83,7 +83,7 @@ bot.on("message", async message => {
                 "~ask [question] - ask Gnar a question"
 				+ "\n" + "~join - join an open gather"
 				+ "\n" + "~leave - leave the gather"
-				+ "\n" + "~dog - get a random doggy picture");
+				+ "\n" + "~dog - get a random doggy picture")
                 .setColor('ORANGE');
                 message.channel.send(embed);
             break;
