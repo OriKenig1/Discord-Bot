@@ -34,7 +34,7 @@ const app = express();
 
 
 const PREFIX = "~";
-q
+
 var fortunes = ["Gnar!", "Shubbanuffa", "Vimaga", "Nakotak", "Kshaa", "Vigishu!", "Wap!", "Hwa!", "Vrooboo", "Raag!", "Wabbo!"];
 
 bot.on("ready", function() {
