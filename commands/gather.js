@@ -183,7 +183,7 @@ function startGather(message){
 }
 			
 
-function postKohot(message){
+module.exports.postKohot = function postKohot(message){
     embedB = new Discord.RichEmbed()
         .addField("Blue Team",
         Blue_Names[0]
