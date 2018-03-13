@@ -388,3 +388,4 @@ function getRoles(message){
 
 module.exports.help = {
 	name: "gather"
+}
