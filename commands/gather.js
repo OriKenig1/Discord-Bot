@@ -47,19 +47,26 @@ module.exports.joinGather = function joinGather(message){
 		startGather(message);
 };
 
-module.exports.removeGather = function removeGather(message, args){
-    if(!args[1]){
-		message.channel.send("The command is: ~remove [number]");
-        return;
-    }
+module.exports.removeGather = function removeGather(message, number, name){
 
-    var j = 0;
-    var numRem = args[1]-1;
-    var nameRem = players[numRem];
-	if(typeof nameRem == 'undefined'){
-		this.listGather(message);
+	var numRem;
+	var nameRem;
+	if(number != null){
+		numRem = number-1;
+		nameRem = players[numRem];
+		if(typeof nameRem == 'undefined'){
+			this.listGather(message);
+			return;
+		}
+	}else if(name != null){
+		numRem = players.indexOf(name);
+		if(numRem == -1){
+			this.listGather(message);
+			return;
+		}
+		nameRem = players[numRem];
+	}else
 		return;
-	}
 	
     var tempPlayers = [];
     players[numRem] = null;
@@ -169,6 +176,14 @@ function startGather(message){
     console.log(Blue_Names);
     console.log(Red_Names);
 
+	postKohot(message);
+	
+	// Save data after finalizing
+	//module.exports.resetGather(false, message);
+}
+			
+
+function postKohot(message){
     embedB = new Discord.RichEmbed()
         .addField("Blue Team",
         Blue_Names[0]
@@ -202,11 +217,8 @@ function startGather(message){
 
 	message.channel.send(embedB);
 	message.channel.send(embedR);
-	
-	module.exports.resetGather(false, message);
 }
 			
-
 function rank_to_string(rank_num){
     if(rank_num == 6)
         return 'Diamond 1';
@@ -306,7 +318,6 @@ function teamAvg(team){
         for(var i = 0; i < Blue.length; i++)
             sum +=Blue[i];
         if(Blue.length != 0) sum = sum / Blue.length;
-		sum += 0.5; // Blue side is easier than red side
         //console.log("Blue AVG: " + sum);
     }
     else if(team == -1){
@@ -377,4 +388,3 @@ function getRoles(message){
 
 module.exports.help = {
 	name: "gather"
-}
