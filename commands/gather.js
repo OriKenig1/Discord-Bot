@@ -216,7 +216,7 @@ function startGather(message){
     console.log(Blue_Names);
     console.log(Red_Names);
 
-	postKohot(message);
+	this.postKohot(message);
 	
 	// Save data after finalizing
 	//module.exports.resetGather(false, message);
