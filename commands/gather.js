@@ -69,6 +69,7 @@ module.exports.removeGather = function removeGather(message, number, name){
 	}else
 		return;
 	
+	j = 0;
     var tempPlayers = [];
     players[numRem] = null;
     for(var i = 0; i < 10; i++){
@@ -131,7 +132,7 @@ module.exports.resetGather = function resetGather(open, message){
     members = []
 
     members_rank = [];
-    ranks = [0, 0, 0, 0 ,0, 0, 0, 0 ,0 ,0];
+    ranks = [0, 0, 0, 0 ,0, 0, 0, 0 ,0 ,0, 0];
     Blue = [];
     Red = [];
     Red_Names = [];
@@ -221,6 +222,8 @@ module.exports.postKohot = function postKohot(message){
 }
 			
 function rank_to_string(rank_num){
+	if(rank_num == 6.25)
+		return 'Master';
     if(rank_num == 6)
         return 'Diamond 1';
     if(rank_num == 5.75)
@@ -307,6 +310,8 @@ function addRank(team, rankNumber){
         toPush = 5.75;
     else if(rankNumber == 9)
         toPush = 6;
+	else if(rankNumber == 10)
+		toPush = 6.25;
         
     if(team == 1) Blue.push(toPush);
     if(team == -1) Red.push(toPush);
@@ -332,6 +337,7 @@ function teamAvg(team){
 }
 
 function getRoles(message){
+	let Master = message.guild.roles.find("name", "Master");
     let Diamond1 = message.guild.roles.find("name", "Diamond 1");
     let Diamond2 = message.guild.roles.find("name", "Diamond 2");
     let Diamond3 = message.guild.roles.find("name", "Diamond 3");
@@ -343,7 +349,11 @@ function getRoles(message){
     let Bronze = message.guild.roles.find("name", "Bronze");
     for(var i = 0; i < members.length; i++){   
         var role = members[i].roles; 
-        if(role.has(Diamond1.id)){
+		if(role.has(Master.id)){
+           members_rank[i] = 6.25;
+           ranks[10]++;
+        } 
+        else if(role.has(Diamond1.id)){
            members_rank[i] = 6;
            ranks[9]++;
         } 

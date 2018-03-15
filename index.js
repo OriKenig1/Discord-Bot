@@ -9,7 +9,8 @@ const gatherFunctions = require("./commands/gather.js");
 bot.commands = new Discord.Collection();
 
 var globalChannel;
-var count = 0;
+var countSYN = 0;
+var countNA = 0;
 
 fs.readdir("./commands/", (err, files) => {
 	if(err) console.log(err);
@@ -46,7 +47,7 @@ bot.on("ready", function() {
 
 bot.on("message", async message => {
 	
-	if(globalChannel == null && message.channel.name == "general")
+	if(globalChannel == null && message.channel.name == "league-news")
 		globalChannel = message.channel;
 	
 	if(message.author.bot) return;
@@ -93,17 +94,30 @@ bot.on("message", async message => {
 });
 
 function checkPlaylist(post){
-	var name = "Synapse";
-	console.log("Checking " + name + " playlist...");
+	console.log("Checking playlists...");
 	youtube.getPlaylist('https://www.youtube.com/playlist?list=PLVGT_7RQui0EUJUKxqJbeGsFlzZWCXiz7')
 	.then(playlist => {
 		playlist.getVideos()
         .then(videos => {
-			console.log("Results: " + videos.length + " | " + count);
-			if(videos.length > count){
+			console.log("Results [Synapse]: " + videos.length + " | " + countSYN);
+			if(videos.length > countSYN){
 				if(post)
-					globalChannel.send("**A new " + name + " video is up!** \n" + videos[0].shortURL);
-				count = videos.length;
+					globalChannel.send("**A new Synapse video is up!** \n" + videos[0].shortURL);
+				countSYN = videos.length;
+			}
+        }).catch(console.log);
+    })
+    .catch(console.log);
+	
+	youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
+	.then(playlist => {
+		playlist.getVideos()
+        .then(videos => {
+			console.log("Results [NA LCS]: " + videos.length + " | " + countNA);
+			if(videos.length > countNA){
+				if(post)
+					globalChannel.send("**A new NA LCS video is up!** \n" + videos[0].shortURL);
+				countNA = videos.length;
 			}
         }).catch(console.log);
     })
@@ -118,23 +132,3 @@ bot.login(TOKEN);
 setInterval(() => {
 	checkPlaylist(true);
   }, 900000);
-  
-  
-  /*
-	fs.readFile('./tmp/playlistSizeTEMP', function(err, prevCount) {
-		youtube.getPlaylist('https://www.youtube.com/playlist?list=PLoBYMdEd0YmXY9Oj7etlb9CNFCfD42GIl')
-		.then(playlist => {
-			playlist.getVideos()
-            .then(videos => {
-				console.log("Vars: " + videos.length + " | " + prevCount);
-				if(videos.length > prevCount){
-					globalChannel.send("**A new NA LCS video is up!** \n" + videos[0].shortURL);
-					fs.writeFile('tmp/playlistSizeTEMP', prevCount++, function (err) {
-						if (err) throw err;
-					});
-				}
-            }).catch(console.log);
-    })
-    .catch(console.log);		
-	});
-	*/
