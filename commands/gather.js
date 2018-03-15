@@ -25,6 +25,42 @@ module.exports.run = async (bot, message, args) => {
 
 }
 
+module.exports.postKohot = function postKohot(message){
+    embedB = new Discord.RichEmbed()
+        .addField("Blue Team",
+        Blue_Names[0]
+        + "\n\n" + Blue_Names[1]
+        + "\n\n" + Blue_Names[2]
+        + "\n\n" + Blue_Names[3]
+        + "\n\n" + Blue_Names[4], true)
+        .setColor('BLUE')
+        .addField("Ranks",
+        rank_to_string(Blue_IDS[0])
+        + "\n\n" + rank_to_string(Blue_IDS[1])
+        + "\n\n" + rank_to_string(Blue_IDS[2])
+        + "\n\n" + rank_to_string(Blue_IDS[3])
+        + "\n\n" + rank_to_string(Blue_IDS[4]), true);
+                
+
+    embedR = new Discord.RichEmbed()
+        .addField("Red Team",
+        Red_Names[0]
+        + "\n\n" + Red_Names[1]
+        + "\n\n" + Red_Names[2]
+        + "\n\n" + Red_Names[3]
+        + "\n\n" + Red_Names[4], true)
+        .setColor('RED')
+        .addField("Ranks",
+        rank_to_string(Red_IDS[0])
+        + "\n\n" + rank_to_string(Red_IDS[1])
+        + "\n\n" + rank_to_string(Red_IDS[2])
+        + "\n\n" + rank_to_string(Red_IDS[3])
+        + "\n\n" + rank_to_string(Red_IDS[4]), true);
+
+	message.channel.send(embedB);
+	message.channel.send(embedR);
+}
+
 module.exports.joinGather = function joinGather(message){
 	var roles = message.member.roles;
     pName = "<@" + message.author.id + ">";
@@ -97,6 +133,8 @@ module.exports.removeGather = function removeGather(message, number, name){
     for(var i = 0; i < tempPlayers.length; i++)
         members[i] = tempPlayers[i];
 
+	
+	
     gatherSize--;
     message.channel.send(nameRem + " has been removed from the gather");
 };
@@ -182,43 +220,6 @@ function startGather(message){
 	
 	// Save data after finalizing
 	//module.exports.resetGather(false, message);
-}
-			
-
-module.exports.postKohot = function postKohot(message){
-    embedB = new Discord.RichEmbed()
-        .addField("Blue Team",
-        Blue_Names[0]
-        + "\n\n" + Blue_Names[1]
-        + "\n\n" + Blue_Names[2]
-        + "\n\n" + Blue_Names[3]
-        + "\n\n" + Blue_Names[4], true)
-        .setColor('BLUE')
-        .addField("Ranks",
-        rank_to_string(Blue_IDS[0])
-        + "\n\n" + rank_to_string(Blue_IDS[1])
-        + "\n\n" + rank_to_string(Blue_IDS[2])
-        + "\n\n" + rank_to_string(Blue_IDS[3])
-        + "\n\n" + rank_to_string(Blue_IDS[4]), true);
-                
-
-    embedR = new Discord.RichEmbed()
-        .addField("Red Team",
-        Red_Names[0]
-        + "\n\n" + Red_Names[1]
-        + "\n\n" + Red_Names[2]
-        + "\n\n" + Red_Names[3]
-        + "\n\n" + Red_Names[4], true)
-        .setColor('RED')
-        .addField("Ranks",
-        rank_to_string(Red_IDS[0])
-        + "\n\n" + rank_to_string(Red_IDS[1])
-        + "\n\n" + rank_to_string(Red_IDS[2])
-        + "\n\n" + rank_to_string(Red_IDS[3])
-        + "\n\n" + rank_to_string(Red_IDS[4]), true);
-
-	message.channel.send(embedB);
-	message.channel.send(embedR);
 }
 			
 function rank_to_string(rank_num){
