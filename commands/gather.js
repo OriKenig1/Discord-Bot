@@ -80,7 +80,7 @@ module.exports.joinGather = function joinGather(message){
     members.push(message.member); // Add player ID
 	message.channel.send(pName + " joined the gather (**" + gatherSize + "**/10)"); 
 	
-    if(gatherSize == 10)
+    if(gatherSize == 1)
 		startGather(message);
 };
 
