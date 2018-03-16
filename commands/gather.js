@@ -57,6 +57,11 @@ module.exports.postKohot = function postKohot(message){
         + "\n\n" + rank_to_string(Red_IDS[3])
         + "\n\n" + rank_to_string(Red_IDS[4]), true);
 
+	if(Red_Names.length != 5 || Blue_Names.length != 5){
+			message.channel.send("I don't have enough players data to organize teams ;-;");
+			return;
+	}
+		
 	message.channel.send(embedB);
 	message.channel.send(embedR);
 }
@@ -80,7 +85,7 @@ module.exports.joinGather = function joinGather(message){
     members.push(message.member); // Add player ID
 	message.channel.send(pName + " joined the gather (**" + gatherSize + "**/10)"); 
 	
-    if(gatherSize == 1)
+    if(gatherSize == 10)
 		startGather(message);
 };
 
