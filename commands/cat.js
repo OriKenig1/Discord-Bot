@@ -8,8 +8,8 @@ module.exports.run = async (bot,message,args) => {
 		console.log(res.text);
 		var str = res.text.substring(9, res.text.length-2);
 		str = str.replace("s", "");
-		str = str.split("\"");
-		str = str.join("");
+		str = str.split("\/");
+		str = str.join("/");
 		console.log(str);
 		
 		let catembed = new Discord.RichEmbed()
