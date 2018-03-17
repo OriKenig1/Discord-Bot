@@ -5,7 +5,7 @@ module.exports.run = async (bot,message,args) => {
 	
 	superagent.get(`http://aws.random.cat/meow`).then(function(res) {
 		console.log(res.text);
-		var str = replaceAll(res.text.substring(9, res.text.length-2), "/", "");
+		var str = res.text.substring(9, res.text.length-2).split("/").join("");
 		console.log(str);
 		
 		let catembed = new Discord.RichEmbed()
@@ -14,10 +14,6 @@ module.exports.run = async (bot,message,args) => {
 	
 		message.channel.send(catembed);
     });
-}
-
-function replaceAll(str, find, replace) {
-    return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
 
 module.exports.help = {
