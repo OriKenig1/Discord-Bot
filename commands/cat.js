@@ -5,11 +5,11 @@ module.exports.run = async (bot,message,args) => {
 	
 	superagent.get(`http://aws.random.cat/meow`).then(function(res) {
 		console.log(res.text);
-		console.log(res.text.substring(9, res.text.length-2));
+		console.log(res.text.substring(9, res.text.length-2).replace("/", ""));
 		
 		let catembed = new Discord.RichEmbed()
 		.setColor("#ff9900")
-		.setImage(res.text.substring(9, res.text.length-2));
+		.setImage(res.text.substring(9, res.text.length-2).replace("/", ""));
 	
 		message.channel.send(catembed);
     });
