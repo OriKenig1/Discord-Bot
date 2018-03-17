@@ -8,10 +8,11 @@ module.exports.run = async (bot,message,args) => {
 		var str = res.text.substring(9, res.text.length-2).split("/").join("");
 		console.log(str);
 		
-		message.channel.send("s", {
-		file: str 
-		});
-		
+		let catembed = new Discord.RichEmbed()
+		.setColor("#ff9900")
+		.setUrl(str);
+	
+		message.channel.send(catembed);
     });
 }
 
