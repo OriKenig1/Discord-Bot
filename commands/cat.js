@@ -8,14 +8,15 @@ module.exports.run = async (bot,message,args) => {
 		var str = res.text.substring(9, res.text.length-2).split("/").join("");
 		console.log(str);
 		
+		let {body} = await superagent
+		.get(str);
+	
 		let catembed = new Discord.RichEmbed()
 		.setColor("#ff9900")
-		.setImage(str);
+		.setImage(body.url);
 	
-		message.channel.send(str);
 		message.channel.send(catembed);
 
-		
 	});
 }
 
