@@ -8,7 +8,7 @@ module.exports.run = async (bot,message,args) => {
 		var str = res.text.substring(9, res.text.length-2).split("/").join("");
 		console.log(str);
 		
-		let {body} = await superagent
+		let {body} = superagent
 		.get(str);
 	
 		let catembed = new Discord.RichEmbed()
