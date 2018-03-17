@@ -7,9 +7,10 @@ module.exports.run = async (bot,message,args) => {
 		
 		console.log(res.text);
 		var img = res.text.substring(55, res.text.length-2);
-		console.log(img);
 		var str = "http://purr.objects-us-west-1.dream.io/i/" + img;
-		console.log(str);
+		
+		//console.log(img);
+		//console.log(str);
 		
 		let catembed = new Discord.RichEmbed()
 		.setColor("#ff9900")
@@ -17,21 +18,6 @@ module.exports.run = async (bot,message,args) => {
 	
 		message.channel.send(catembed);
 		
-		/*
-
-		
-		let {body} = superagent.get(str).then(function(res) {
-			
-			console.log(res.url);
-			console.log(body.url);
-			
-			let catembed = new Discord.RichEmbed()
-			.setColor("#ff9900")
-			.setImage(res.url);
-	
-			message.channel.send(catembed);
-		});
-		*/
 	});
 }
 
