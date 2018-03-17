@@ -8,15 +8,7 @@ module.exports.run = async (bot,message,args) => {
 		var str = res.text.substring(9, res.text.length-2).split("/").join("");
 		console.log(str);
 		
-		 message.channel.sendMessage({
-        "embed": {
-                title: 'dd',
-                url: 'dd',
-                "image": {
-                "url": str,
-                }
-            }
-        });
+		message.channel.sendFile(str, "d", "x");
 		
 		/*
 		let catembed = new Discord.RichEmbed()
