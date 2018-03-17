@@ -10,7 +10,7 @@ module.exports.run = async (bot,message,args) => {
 		
 		let catembed = new Discord.RichEmbed()
 		.setColor("#ff9900")
-		.setImage(res.text.substring(9, res.text.length-2);
+		.setImage(res.text.substring(9, res.text.length-2));
 	
 		message.channel.send(catembed);
     });;
