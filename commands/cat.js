@@ -6,9 +6,9 @@ module.exports.run = async (bot,message,args) => {
 	superagent.get(`http://aws.random.cat/meow`).then(function(res) {
 		
 		console.log(res.text);
-		var str = res.text.substring(9, res.text.length-2);
-		str = str.replace("s", "");
-		str = str.replace("\/","/").replace("\/","/").replace("\/","/").replace("\/","/");
+		var img = res.text.substring(55, res.text.length-2);
+		console.log(img);
+		var str = "http://purr.objects-us-west-1.dream.io/i/" + img;
 		console.log(str);
 		
 		let catembed = new Discord.RichEmbed()
