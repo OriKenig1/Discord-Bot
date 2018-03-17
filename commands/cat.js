@@ -4,10 +4,12 @@ const superagent = require("superagent");
 module.exports.run = async (bot,message,args) => {
 	let {body} = await superagent
 	.get(`http://aws.random.cat/meow`);
-	
+	console.log(body);
 	let dogembed = new Discord.RichEmbed()
 	.setColor("#ff9900")
-	.setImage(body.url);
+	.setImage(body);
+	
+	
 	
 	message.channel.send(dogembed);
 }
